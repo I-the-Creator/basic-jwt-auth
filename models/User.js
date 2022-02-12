@@ -1,0 +1,1 @@
+// Scheme of 'User' entity
