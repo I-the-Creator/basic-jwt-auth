@@ -4,11 +4,17 @@
 const Router = require('express')
 const router = new Router();
 
+// Express-validator - middleware
+const { check } = require('express-validator');
+
 // Import Controller
 const controller = require('./authControler')
 
-// POST requests - url and function
-router.post('/registration', controller.registration)
+// POST requests - url and function with validation
+router.post('/registration', [  
+    check('username', 'Username cannot be empty').notEmpty(),
+    check('password', 'Password must be at least 4 and not more than 10 characters long').isLength({min:4, max:10})
+], controller.registration)
 router.post('/login', controller.login)
 // GET requet - to establish user role
 router.get('/users', controller.getUsers)
